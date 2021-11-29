@@ -39,10 +39,10 @@ public class LineDrawner : MonoBehaviour{
 
     void BeginDraw()
     {
-        currentLine = Instantiate(LinePrefab,transform.position,Quaternion.identity,transform).GetComponent<Line>();
+        currentLine = Instantiate(LinePrefab,Input.mousePosition,Quaternion.identity,transform).GetComponent<Line>();
         
-        currentLine.SetPointsMinDistance(LinePointsMinDistance);    
-        currentLine.SetLineWidth(LineWidth);    
+        currentLine.SetPointsMinDistance(LinePointsMinDistance);
+        currentLine.SetLineWidth(LineWidth);
     }
     
     void Draw()
@@ -53,7 +53,7 @@ public class LineDrawner : MonoBehaviour{
         List<RaycastResult> results = new List<RaycastResult>();
 
         m_Raycaster.Raycast(m_PointerEventData, results);
-        
+
         foreach (var result in results)
         {
             Vector2 mousePosition =Input.mousePosition;
