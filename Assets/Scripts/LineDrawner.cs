@@ -39,7 +39,7 @@ public class LineDrawner : MonoBehaviour{
 
     void BeginDraw()
     {
-        currentLine = Instantiate(LinePrefab, this.transform).GetComponent<Line>();
+        currentLine = Instantiate(LinePrefab,transform.position,Quaternion.identity,transform).GetComponent<Line>();
         
         currentLine.SetPointsMinDistance(LinePointsMinDistance);    
         currentLine.SetLineWidth(LineWidth);    
@@ -54,9 +54,9 @@ public class LineDrawner : MonoBehaviour{
 
         m_Raycaster.Raycast(m_PointerEventData, results);
         
-        foreach (RaycastResult result in results)
+        foreach (var result in results)
         {
-            Vector2 mousePosition = m_PointerEventData.position;
+            Vector2 mousePosition =Input.mousePosition;
             currentLine.AddPoint(mousePosition);
         }
         if (Input.GetMouseButtonUp(0))
@@ -81,7 +81,7 @@ public class LineDrawner : MonoBehaviour{
     IEnumerator DistributionOfCharacters()
     {
         Debug.Log("Поставить челиков");
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
         Destroy(currentLine.gameObject);
     }
 }
